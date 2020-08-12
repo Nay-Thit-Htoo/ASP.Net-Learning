@@ -1,0 +1,21 @@
+
+//create sesion method
+[WebMethod (EnableSession=true)]
+       
+       //မရှိမဖြစ်ထည့်ပေးရမယ်
+        public static string Check_Student(string name,string rollnumber)
+        {
+            string path="";
+            StudentDatabaseController control = new StudentDatabaseController();
+            var check = control.checkStudent(name, rollnumber);
+            if (check)
+            {
+                path = "showinformationstudent.aspx";
+                HttpContext.Current.Session.Add("RollNumber", rollnumber);
+            }
+            return path;
+                
+            
+         
+            
+        }
