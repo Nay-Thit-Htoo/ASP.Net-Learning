@@ -1,0 +1,26 @@
+public class ColorDeleteOutput
+    {
+        public List<ResponseMessage> Response { get; set; }
+    }
+
+    public class ResponseMessage
+    {
+        public string StyleNumber { get; set; }
+        public string ColorLongDesc { get; set; }
+        public string DistroDesc { get; set; }
+        public string Status { get; set; }
+    }
+
+
+
+Adding value to Objects:
+
+List<ResponseMessage> respmsg = new List<ResponseMessage>();
+
+respmsg.Add(new ResponseMessage { ColorLongDesc = "BLUE", StyleNumber = "124578", DistroDesc = "MARIO BRACKEN", Status = "SUCCESS" });
+
+
+
+Converting to JSON:
+
+  string sJSONResponse = JsonConvert.SerializeObject(respmsg);
