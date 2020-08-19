@@ -1,0 +1,9 @@
+   var query = (from item in dbContext.Items
+                where item.CategoryName == categoryName && item.ItemName == itemName
+                select item.ItemId).FirstOrDefault();
+
+       
+                
+                              
+                        
+          
