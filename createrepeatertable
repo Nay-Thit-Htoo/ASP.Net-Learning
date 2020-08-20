@@ -1,0 +1,30 @@
+<tbody>
+                                                <asp:Repeater runat="server" ID="rptRD" OnItemCommand="rptRD_ItemCommand">
+                                                    <%----%>
+                                                    <ItemTemplate>
+                                                        <tr>
+                                                            <td><%# (Container.ItemIndex + 1).ToString() %></td>
+                                                            <td><%#Eval("WarehouseName") %></td>
+                                                            <td><%#Eval("VoucherNo") %></td>
+                                                            <%--<td><%#Eval("EnrollName") %></td>
+                                                        <td><%#Eval("AcceptName") %></td>--%>
+                                                            <td><%#Eval("CategoryName") %></td>
+                                                            <td><%#Eval("ItemName") %></td>
+                                                            <td><%#Eval("ReceiveQty") %></td>
+                                                            <td><%#Eval("ReceivePrice") %></td>
+                                                            <td><%#Eval("ReceiveTotalCost") %></td>
+                                                            <td><%#Eval("SerialNo") %></td>
+                                                            <td><%#Eval("MeterNo") %></td>
+                                                            <td><%#Eval("ReceiveRemark") %></td>
+                                                            <td>
+
+                                                                <asp:LinkButton runat="server" ID="btnEdit" ClientIDMode="Static" ValidationGroup="edt" CommandName="Edit" CommandArgument='<%#Eval("ReceiveDetailId")+";"+Eval("VoucherNo")+";"+Eval("SerialNo")+";"+Eval("MeterNo")+";"+Eval("ReceiveRemark")%>'> 
+                                                                    <i class="fas fa-wrench"></i>
+                                                                </asp:LinkButton>
+                                                            <td>
+                                                                <asp:LinkButton runat="server" ID="btnDelete" ValidationGroup="edt" ClientIDMode="Static" CommandName="Delete" CommandArgument='<%#Eval("ReceiveDetailId")%>' OnClientClick="OpenDelete();return false;"> <i class="fas fa-trash-alt"></i></asp:LinkButton>
+                                                            </td>
+                                                        </tr>
+                                                    </ItemTemplate>
+                                                </asp:Repeater>
+                                            </tbody>
