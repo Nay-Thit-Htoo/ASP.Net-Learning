@@ -1,0 +1,31 @@
+ //for switching button
+        $(".switch").find("input[type=checkbox]").on("change",function() 
+        {
+            var _status = $(this).prop('checked');                
+               
+            $.ajax({             
+                type: "POST",
+                url: "stockdetail.aspx/SwitchToggle",
+                data: JSON.stringify({ status:_status}),
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (response)
+                {
+                    receiveDataList = JSON.parse(response.d);
+                    CreateTable();
+                    //  table.clear().draw();
+                    table.fnClearTable();
+                    table.data = receiveDataList;
+                    // table.rows.add(warehouseList).draw();
+                    table.fnAddData(receiveDataList);
+                },
+                failure: function (response)
+                {
+                        
+                }
+            });
+
+
+
+               
+        });
