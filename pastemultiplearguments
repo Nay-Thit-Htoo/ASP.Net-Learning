@@ -1,0 +1,7 @@
+"aoColumnDefs": [
+
+               {
+                   "mRender": function (data, type, row) {
+                       return '<a id="txtRRNo" href="javascript:void(0);" onclick="drawStockList('+ row.RRNo + ', \'' + row.DateReceived + '\' , \'' + row.Status + ' \', \'' + row.Remarks + '\');">' + row.RRNo + '</a>'
+                   }, "aTargets": [0]
+               },
