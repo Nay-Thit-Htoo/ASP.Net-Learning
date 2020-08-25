@@ -1,4 +1,9 @@
-   //create datatable in with html
+//call document ready
+  LoadReceiveDataFilled("false", wid, receiveheaderid, itemid);
+  LoadReceiveDataEmpty("false", wid, receiveheaderid, itemid);
+
+
+//create datatable in with html
    <table id="tbl_rd" class="datatable">
                                                             <thead style="background-color: gainsboro;">
                                                                 <tr>
@@ -316,5 +321,63 @@
                      { text: '<span style="color:#4d4d4d; margin-right:15px">Csv<span>', extend: 'csvHtml5', },
                      { text: '<span style="color:#4d4d4d; margin-right:15px">Copy<span>', extend: 'copyHtml5', },
                 ]
+            });
+        }
+        
+        
+        //edit data button
+         //edit button
+        function editData(myvalue) {
+            var rowIndexDataList;
+            $.ajax({
+                url: "stockdetail.aspx/LoadReceiveDatainfofilled",
+                type: "POST",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (response) {
+                    rowIndexDataList = JSON.parse(response.d);
+                    var listData = rowIndexDataList[myvalue];
+                    var itemid = listData.ItemID;
+                    var itemname = listData.ItemName;
+                    var receiveid = listData.ReceiveDetailId;
+                    var remainserialmeter = listData.RemainSerialMeter;
+                    var warehouseName = listData.warehouseName;
+
+
+                    $('#<%=ddlRDWarehouse.ClientID%> option:selected').text(warehouseName);
+
+                    $("#<%=btnRDSave.ClientID%>").val("Edit");
+
+                    $("#<%=txtRDEnrollUser.ClientID%>").val(listData.EnrollUserName);
+                    $("label[for='txtRDEnrollUser']").addClass("active");
+
+                    $("#<%=txtRDEnrollUser.ClientID%>").val(listData.EnrollUserName);
+                    $("label[for='txtRDEnrollUser']").addClass("active");
+
+                    $("#<%=txtRDItemQty.ClientID%>").val(listData.ReceiveQty);
+                    $("label[for='txtRDItemQty']").addClass("active");
+
+                    $("#<%=txtRDItemPrice.ClientID%>").val(listData.ReceivePrice);
+                    $("label[for='txtRDItemPrice']").addClass("active");
+
+                    $("#<%=txtRDTotalCost.ClientID%>").val(listData.ReceiveTotalCost);
+                    $("label[for='txtRDTotalCost']").addClass("active");
+
+                    $("#<%=txtSerialNo.ClientID%>").val(listData.SerialNo);
+                    $("label[for='txtSerialNo']").addClass("active");
+
+                    $("#<%=txtMeterNo.ClientID%>").val(listData.MeterNo);
+                    $("label[for='txtMeterNo']").addClass("active");
+
+                    $("#<%=txtRDRemark.ClientID%>").val(listData.ReceiveRemark);
+                    $("label[for='txtRDRemark']").addClass("active");
+
+                    $('#<%=serialMeterNumber.ClientID%>').html(remainserialmeter);
+
+
+                },
+                error: function (response) {
+                    console.log();
+                }
             });
         }
