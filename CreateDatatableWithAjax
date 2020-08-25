@@ -1,0 +1,26 @@
+   <table id="tbl_rd" class="datatable">
+                                                            <thead style="background-color: gainsboro;">
+                                                                <tr>
+                                                                    <th><font size="2px">No</font></th>
+                                                                    <th style="display:none;"><font size="2px">ReceiveDetailId</font></th>
+                                                                    <th style="display:none;"><font size="2px">WarehouseId</font></th>
+                                                                    <th style="text-align: center;"><font size="2px">Warehouse<br />Name</font></th>
+                                                                    <th><font size="2px">VoucherNo</font></th>
+                                                                    <th style="display:none;"><font size="2px">ပစ္စည်းပေးသွင်းသူ</font></th>
+                                                                    <th style="display:none;"><font size="2px">ပစ္စည်းလက်ခံသူ</font></th>
+                                                                    <th style="text-align: center;"><font size="2px">Category<br />Name</font></th>
+                                                                    <th><font size="2px">Item ID</font></th>
+                                                                    <th><font size="2px">Item Name</font></th>
+                                                                    <th><font size="2px">Item Qty</font></th>
+                                                                    <th><font size="2px">Item Price</font></th>
+                                                                    <th style="text-align: center;"><font size="2px">Item<br />TotalCost</font>
+                                                                    </th>
+                                                                    <th><font size="2px">Serial No</font></th>
+                                                                    <th><font size="2px">Meter No</font></th>
+                                                                    <th><font size="2px">မှတ်ချက်</font></th>
+                                                                    <th style="display:none;"><font size="2px">Remain Serial Meter</font></th>
+                                                                    <th>Action</th>
+                                                                    <th>Delete</th>
+                                                                </tr>
+                                                            </thead>
+                                                        </table>
