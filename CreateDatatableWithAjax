@@ -1,3 +1,4 @@
+   //create datatable in with html
    <table id="tbl_rd" class="datatable">
                                                             <thead style="background-color: gainsboro;">
                                                                 <tr>
@@ -24,3 +25,296 @@
                                                                 </tr>
                                                             </thead>
                                                         </table>
+//JQuery with Ajax
+
+        //loading data for datalist
+        function LoadReceiveDataEmpty(isReload, wid, receiveheaderid, itemid) {
+            $.ajax({
+                url: "stockdetail.aspx/LoadReceiveDatainforEmpty",
+                type: "POST",
+                data: JSON.stringify({ warehouseId: wid, receiveheaderId: receiveheaderid, itemId: itemid }),
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (response) {
+                    receiveDataListEmpty = JSON.parse(response.d);
+                    if (isReload == "false") {
+                        CreateTableEmpty();
+                    }
+                    if (receiveDataListEmpty.length > 0) {
+
+                        ////  table.clear().draw();
+                        empty_table.fnClearTable();
+                        empty_table.data = receiveDataListEmpty;
+                        //// table.rows.add(warehouseList).draw();
+                        empty_table.fnAddData(receiveDataListEmpty);
+                    }
+                    else {
+                        empty_table.fnClearTable();
+
+
+                    }
+
+
+                },
+                error: function (response) {
+                    console.log();
+                }
+            });
+        }
+
+        //creating datatable for empty
+        function CreateTableEmpty() {
+
+            var normalOption =
+               [
+
+                   { data: null, "width": "7%" },
+                   { data: "ReceiveDetailId", className: "hide" },
+                   { data: "WarehouseId", className: "hide" },
+                   { data: "WarehouseName", "width": "10%" },
+                   { data: "VoucherNo", "width": "10%" },
+                   { data: "EnrollUserName", className: "hide" },
+                   { data: "AcceptanceUserName", className: "hide" },
+                   { data: "CategoryName", "width": "10%" },
+                   { data: "ItemID", className: "hide" },
+                   { data: "ItemName", "width": "10%" },
+                   { data: "ReceiveQty", "width": "8%" },
+                   { data: "ReceivePrice", "width": "10%" },
+                   { data: "ReceiveTotalCost", "width": "10%" },
+                   { data: "SerialNo", "width": "10%" },
+                   { data: "MeterNo", "width": "10%" },
+                   { data: "ReceiveRemark", "width": "10%" },
+                   { data: "RemainSerialMeter", className: "hide" },
+                   {
+                       data: "Action", "width": "5%", render: function (data, type, row, meta) {
+                           return '<a href="#" onclick="editData(' + meta.row + ');"><i class="fas fa-wrench" style="font-size:18px;text-align:center;"></i></a>'
+                       }
+                   },
+                   {
+                       data: "Delete", "width": "5%", render: function (data, type, row, meta) {
+                           return '<a href="#" onclick="delete_for_empty(' + meta.row + ');"><i class="fas fa-trash-alt" style="font-size:18px;text-align:center;"></i></a>'
+                       }
+                   }
+               ];
+
+            var mobileOption = [
+                   { data: null, "width": "7%" },
+                   { data: "ReceiveDetailId", className: "hide" },
+                   { data: "WarehouseId", className: "hide" },
+                   { data: "WarehouseName", "width": "100%" },
+                   { data: "VoucherNo", "width": "100%" },
+                   { data: "EnrollUserName", className: "hide" },
+                   { data: "AcceptanceUserName", className: "hide" },
+                   { data: "CategoryName", "width": "100%" },
+                   { data: "ItemID", className: "hide" },
+                   { data: "ItemName", "width": "100%" },
+                   { data: "ReceiveQty", "width": "100%" },
+                   { data: "ReceivePrice", "width": "100%" },
+                   { data: "ReceiveTotalCost", "width": "100%" },
+                   { data: "SerialNo", "width": "100%" },
+                   { data: "MeterNo", "width": "100%" },
+                   { data: "ReceiveRemark", "width": "100%" },
+                   { data: "RemainSerialMeter", className: "hide" },
+                   {
+                       data: "Action", "width": "5%", render: function (data, type, row, meta) {
+                           return '<a href="#" onclick="editData(' + meta.row + ');"><i class="fas fa-wrench" style="font-size:18px;text-align:center;"></i></a>'
+
+                       }
+                   },
+                   {
+                       data: "Delete", "width": "5%", render: function (data, type, row) {
+                           return '<a href="#" onclick="delete_for_empty(' + meta.row + ');"><i class="fas fa-trash-alt" style="font-size:18px;text-align:center;"></i></a>'
+                       }
+                   }
+            ];
+            empty_table = $('#tbl_rd2').dataTable({
+                "oLanguage": {
+                    "sSearch": "",
+                    "sSearchPlaceholder": "Type to search",
+                    "sInfo": "_START_ -_END_ of _TOTAL_",
+                    "sLengthMenu": '<span>Rows per page:</span><select class="browser-default">' +
+                      '<option value="10">10</option>' +
+                      '<option value="20">20</option>' +
+                      '<option value="30">30</option>' +
+                      '<option value="40">40</option>' +
+                      '<option value="50">50</option>' +
+                      '<option value="-1">All</option>' +
+                      '</select></div>'
+                },
+                "autoWidth": false,
+                data: receiveDataListEmpty,
+
+                "columns": screen.width > 640 ? normalOption : mobileOption,
+
+                columnDefs: [
+                    { targets: 0, render: function (data, type, row, meta) { return type == 'export' ? meta.row : data; } },
+                ],
+                "fnRowCallback": function (nRow, aData, iDisplayIndex, iDisplayIndexFull) {
+                    var index = iDisplayIndexFull + 1;
+                    $("td:first", nRow).html(index);
+                    return nRow;
+                },
+                buttons: [
+                     {
+                         text: '<span style="color:#4d4d4d; margin-right:15px">Print<span>',
+                         extend: 'print',
+                         className: '',
+                         title: '',
+                         //autoPrint: false,
+                         customize: function (win) {
+                             $(win.document.body).css('font-size', '10pt').prepend('<h4>Title Test</h4>', '<img src="http://i.imgur.com/w931ov4.png" style="position: fixed;  top: 50%;  left: 50%;  transform: translate(-50%, -50%);" />');
+                             $(win.document.body).find('table').addClass('compact').css('font-size', 'inherit');
+                         }
+                     },
+                     { text: '<span style="color:#4d4d4d; margin-right:15px">Excel<span>', extend: 'excelHtml5', },
+                     { text: '<span style="color:#4d4d4d; margin-right:15px">Csv<span>', extend: 'csvHtml5', },
+                     { text: '<span style="color:#4d4d4d; margin-right:15px">Copy<span>', extend: 'copyHtml5', },
+                ]
+            });
+        }
+
+        //loading data for datalist
+        function LoadReceiveDataFilled(isReload, wid, receiveheaderid, itemid) {
+            $.ajax({
+                url: "stockdetail.aspx/LoadReceiveDatainfofilled",
+                type: "POST",
+                data: JSON.stringify({ warehouseId: wid, receiveheaderId: receiveheaderid, itemId: itemid }),
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (response) {
+                    receiveDataListFilled = JSON.parse(response.d);
+                    if (isReload == "false") {
+                        CreateTableFilled();
+                    }
+                    if (receiveDataListFilled.length > 0) {
+                        //  table.clear().draw();
+                        table.fnClearTable();
+                        table.data = receiveDataListFilled;
+                        // table.rows.add(warehouseList).draw();
+                        table.fnAddData(receiveDataListFilled);
+
+                    }
+                    else {
+                        table.fnClearTable();
+                    }
+
+
+
+                },
+                error: function (response) {
+                    console.log();
+                }
+            });
+        }
+
+
+        //creating datatable for filled
+        function CreateTableFilled() {
+
+            var normalOption =
+               [
+                   //for filled
+                   { data: null, "width": "7%" },
+                   { data: "ReceiveDetailId", className: "hide" },
+                   { data: "WarehouseId", className: "hide" },
+                   { data: "WarehouseName", "width": "10%" },
+                   { data: "VoucherNo", "width": "10%" },
+                   { data: "EnrollUserName", className: "hide" },
+                   { data: "AcceptanceUserName", className: "hide" },
+                   { data: "CategoryName", "width": "10%" },
+                   { data: "ItemID", className: "hide" },
+                   { data: "ItemName", "width": "10%" },
+                   { data: "ReceiveQty", "width": "8%" },
+                   { data: "ReceivePrice", "width": "10%" },
+                   { data: "ReceiveTotalCost", "width": "10%" },
+                   { data: "SerialNo", "width": "10%" },
+                   { data: "MeterNo", "width": "10%" },
+                   { data: "ReceiveRemark", "width": "10%" },
+                   { data: "RemainSerialMeter", className: "hide" },
+                   {
+                       data: "Action", "width": "5%", render: function (data, type, row, meta) {
+                           return '<a href="#" onclick="editData(' + meta.row + ');"><i class="fas fa-wrench" style="font-size:18px;text-align:center;"></i></a>'
+                       }
+                   },
+                   {
+                       data: "Delete", "width": "5%", render: function (data, type, row, meta) {
+                           return '<a href="#" onclick="delete_for_filled(' + meta.row + ');"><i class="fas fa-trash-alt" style="font-size:18px;text-align:center;"></i></a>'
+                       }
+                   }
+               ];
+
+            var mobileOption = [
+                { data: null, "width": "7%" },
+                { data: "ReceiveDetailId", className: "hide" },
+                { data: "WarehouseId", className: "hide" },
+                { data: "WarehouseName", "width": "100%" },
+                { data: "VoucherNo", "width": "100%" },
+                { data: "EnrollUserName", className: "hide" },
+                { data: "AcceptanceUserName", className: "hide" },
+                { data: "CategoryName", "width": "100%" },
+                { data: "ItemID", className: "hide" },
+                { data: "ItemName", "width": "100%" },
+                { data: "ReceiveQty", "width": "100%" },
+                { data: "ReceivePrice", "width": "100%" },
+                { data: "ReceiveTotalCost", "width": "100%" },
+                { data: "SerialNo", "width": "100%" },
+                { data: "MeterNo", "width": "100%" },
+                { data: "ReceiveRemark", "width": "100%" },
+                { data: "RemainSerialMeter", className: "hide" },
+                  {
+                      data: "Action", "width": "10%", render: function (data, type, row, meta) {
+                          return '<a href="#" onclick="editData(' + meta.row + ');"><i class="fas fa-wrench" style="font-size:18px;text-align:center;"></i></a>'
+
+                      }
+                  },
+                {
+                    data: "Delete", "width": "10%", render: function (data, type, row) {
+                        return '<a href="#" onclick="delete_for_filled(' + meta.row + ');"><i class="fas fa-trash-alt" style="font-size:18px;text-align:center;"></i></a>'
+                    }
+                }
+            ];
+            table = $('#tbl_rd').dataTable({
+                "oLanguage": {
+                    "sSearch": "",
+                    "sSearchPlaceholder": "Type to search",
+                    "sInfo": "_START_ -_END_ of _TOTAL_",
+                    "sLengthMenu": '<span>Rows per page:</span><select class="browser-default">' +
+                      '<option value="10">10</option>' +
+                      '<option value="20">20</option>' +
+                      '<option value="30">30</option>' +
+                      '<option value="40">40</option>' +
+                      '<option value="50">50</option>' +
+                      '<option value="-1">All</option>' +
+                      '</select></div>'
+                },
+                "autoWidth": false,
+                data: receiveDataListFilled,
+
+                "columns": screen.width > 640 ? normalOption : mobileOption,
+
+                columnDefs: [
+                    { targets: 0, render: function (data, type, row, meta) { return type == 'export' ? meta.row : data; } },
+                ],
+                "fnRowCallback": function (nRow, aData, iDisplayIndex, iDisplayIndexFull) {
+                    var index = iDisplayIndexFull + 1;
+                    $("td:first", nRow).html(index);
+                    return nRow;
+                },
+                buttons: [
+                     {
+                         text: '<span style="color:#4d4d4d; margin-right:15px">Print<span>',
+                         extend: 'print',
+                         className: '',
+                         title: '',
+                         //autoPrint: false,
+                         customize: function (win) {
+                             $(win.document.body).css('font-size', '10pt').prepend('<h4>Title Test</h4>', '<img src="http://i.imgur.com/w931ov4.png" style="position: fixed;  top: 50%;  left: 50%;  transform: translate(-50%, -50%);" />');
+                             $(win.document.body).find('table').addClass('compact').css('font-size', 'inherit');
+                         }
+                     },
+                     { text: '<span style="color:#4d4d4d; margin-right:15px">Excel<span>', extend: 'excelHtml5', },
+                     { text: '<span style="color:#4d4d4d; margin-right:15px">Csv<span>', extend: 'csvHtml5', },
+                     { text: '<span style="color:#4d4d4d; margin-right:15px">Copy<span>', extend: 'copyHtml5', },
+                ]
+            });
+        }
