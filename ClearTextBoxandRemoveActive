@@ -1,0 +1,8 @@
+
+ //to clear serial & meter & remark
+        function ClearSerialMeterRemark() {
+            $('#txtRDRemark').val(''); $("label[for='txtRDRemark']").removeClass("active");
+            $('#txtMeterNo').val(''); $("label[for='txtMeterNo']").removeClass("active");
+            $('#txtSerialNo').val(''); $("label[for='txtSerialNo']").removeClass("active");
+            return false;
+        }
