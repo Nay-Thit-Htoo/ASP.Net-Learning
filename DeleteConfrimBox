@@ -1,0 +1,39 @@
+  
+  <%--Modal Process--%>
+
+    <div id="modal" class="modal" style="width: 28%;">
+        <div class="modal-content">
+            <h5 class="title" style="font-weight: bold;">Delete Confirmation</h5>
+            <p class="msg_body">Are you sure want to delete this record.?</p>
+        </div>
+        <div class="modal-footer">
+            <a href="#!" id="agree" class="modal-close waves-effect  btn-flat red white-text mx-2">Delete</a>
+            <a href="#!" class="modal-close waves-effect btn-flat blue white-text mx-2">Cancel</a>
+        </div>
+    </div>
+    
+    
+    
+  
+  //declare in document ready
+           //call modal popup
+            $('.modal').modal();
+            
+            
+  //open delete modal when delete button click
+        function OpenDeletModal() {
+            $('.modal').modal('open');
+            return true;
+        }
+
+
+
+//clicking for delete agree button
+        //$('#agree').click(function (e) {
+        //    var listArr = $('#hidDeletion').val().split('=');
+        //    if (listArr[1] == 'F')
+        //        deleteData_Filled(parseInt(listArr[0]));
+        //    else
+        //        deleteData_Empty(parseInt(listArr[0]));
+
+        //});
