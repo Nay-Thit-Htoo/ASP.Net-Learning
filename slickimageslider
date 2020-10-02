@@ -1,0 +1,173 @@
+
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
+* {
+            box-sizing: border-box;
+        }
+
+        /*img {
+            max-width: 100%;
+            width: 100%;
+        }*/
+
+
+        .wrap {
+            position: relative;
+            z-index: 100;
+            width: 100%;
+            height: 100%;
+            background-color: none;
+            -webkit-background-size: cover;
+            background-size: cover;
+            overflow: hidden;
+        }
+
+            .wrap:after {
+                content: '';
+                position: absolute;
+                z-index: 2;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                /*background:#fff;*/
+                /*rgba(0,0,0,.5)*/
+            }
+
+        .slider {
+            position: relative;
+            z-index: 200;
+            padding: 0 0px;
+            margin: 5rem auto;
+            margin-top: 0px;
+            max-width: 800px;
+            width: 100%;
+        }
+
+        .slick-arrow {
+            position: absolute;
+            top: 50%;
+            width: 40px;
+            height: 50px;
+            line-height: 50px;
+            margin-top: -25px;
+            border: none;
+            background: transparent;
+            color: rgba(0,0,0,0.9);
+            font-family: monospace;
+            font-size: 5rem;
+            z-index: 300;
+            outline: none;
+        }
+
+        .slick-prev {
+            left: -50px;
+            text-align: left;
+        }
+
+        .slick-next {
+            right: -50px;
+            text-align: right;
+        }
+
+
+
+        .item.slick-slide {
+            width: 400px;
+            height: 400px !important;
+            transition: transform .4s;
+            position: relative;
+        }
+
+        .slick-slide:after {
+            content: '';
+            position: absolute;
+            z-index: 2;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,.5);
+            transition: transform .4s;
+        }
+
+        .item.slick-slide {
+            transform: scale(0.7) translate(640px);
+        }
+
+            .item.slick-slide.slick-center + .slick-slide {
+                transform: scale(0.8) translate(-250px);
+                z-index: 10;
+            }
+
+                .item.slick-slide.slick-center + .slick-slide + .item.slick-slide {
+                    transform: scale(0.7) translate(-640px);
+                    z-index: 5;
+                }
+
+            .item.slick-slide.slick-active {
+                transform: scale(0.8) translate(250px);
+            }
+
+            .item.slick-slide.slick-center {
+                /* margin: 0 -10%; */
+                transform: scale(1);
+                z-index: 30;
+            }
+
+        .slick-center:after {
+            opacity: 0;
+        }
+
+        .video-fluid {
+            width: 100%;
+            height: auto;
+        }
+        
+        
+        
+            <div class="wrap">      
+        <div class="slider">          
+          <div class="item">
+             <div class="card">
+                 <div class="card-body">                 
+                         <video class="video-fluid z-depth-1">
+                          <source src="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4" type="video/mp4" />
+                      </video>
+                        <h5>Processing Training</h5>
+                        <p style="text-align:justify;font-size:12px;">
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad beatae consequuntur dolore, dolorem esse ipsa nostrum possimus quasi, recusandae reiciendis rem tenetur veritatis vero! Commodi maiores nulla officia reprehenderit ut!
+                        </p>
+                         <div class="float-right btn btn-danger">
+                           <a href="cmopage.aspx">ကြည့်ရန်</a>
+                       </div>
+                  
+             </div>    
+           </div>
+          
+            </div> 
+          <div class="item">
+            <img src="https://images.unsplash.com/photo-1489440543286-a69330151c0b?dpr=1&auto=format&fit=crop&w=568&h=379&q=60&cs=tinysrgb&ixid=dW5zcGxhc2guY29tOzs7Ozs%3D" alt="">
+          </div>
+          <div class="item">
+            <img src="https://images.unsplash.com/photo-1490718687940-0ecadf414600?dpr=1&auto=format&fit=crop&w=568&h=378&q=60&cs=tinysrgb&ixid=dW5zcGxhc2guY29tOzs7Ozs%3D" alt="">
+          </div>
+          <div class="item">
+            <img src="https://images.unsplash.com/photo-1507032336878-13f159192baa?dpr=1&auto=format&fit=crop&w=568&h=379&q=60&cs=tinysrgb&ixid=dW5zcGxhc2guY29tOzs7Ozs%3D" alt="">
+          </div>
+          <div class="item">
+            <img src="https://images.unsplash.com/photo-1506268919522-a927511962a9?dpr=1&auto=format&fit=crop&w=568&h=379&q=60&cs=tinysrgb&ixid=dW5zcGxhc2guY29tOzs7Ozs%3D" alt="">
+          </div>
+          <div class="item">
+            <img src="https://images.unsplash.com/photo-1501879779179-4576bae71d8d?dpr=1&auto=format&fit=crop&w=568&h=379&q=60&cs=tinysrgb&ixid=dW5zcGxhc2guY29tOzs7Ozs%3D" alt="">
+          </div>
+          <div class="item">
+            <img src="https://images.unsplash.com/photo-1494253188410-ff0cdea5499e?dpr=1&auto=format&fit=crop&w=568&h=379&q=60&cs=tinysrgb&ixid=dW5zcGxhc2guY29tOzs7Ozs%3D" alt="">
+          </div>
+          <div class="item">
+            <img src="https://images.unsplash.com/photo-1511965682784-5ec68f744ea1?dpr=1&auto=format&fit=crop&w=568&h=319&q=60&cs=tinysrgb&ixid=dW5zcGxhc2guY29tOzs7Ozs%3D" alt="">
+          </div>          
+        </div>
+      </div>
+        
+        
