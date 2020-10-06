@@ -1,0 +1,106 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Net;
+using System.Net.Mail;
+using System.Text;
+using System.Web;
+using System.Web.Services;
+
+namespace SAVVYFOOD
+{
+    /// <summary>
+    /// Summary description for SedMailServices
+    /// </summary>
+    [WebService(Namespace = "http://tempuri.org/")]
+    [WebServiceBinding(ConformsTo = WsiProfiles.BasicProfile1_1)]
+    [System.ComponentModel.ToolboxItem(false)]
+    // To allow this Web Service to be called from script, using ASP.NET AJAX, uncomment the following line. 
+    // [System.Web.Script.Services.ScriptService]
+    public class SedMailServices : System.Web.Services.WebService
+    {
+
+        [WebMethod]
+        public string TestMail(string name)
+        {
+            string subject="";
+            string messagebody="";
+
+            string answerone = name.Split(',')[0];
+            string answertwo = name.Split(',')[1];
+            string answerthree = name.Split(',')[2];         
+
+            if (answerone == "hh" && answertwo == "hh" && answerthree == "hh")
+            {
+                SAVVYController controller = new SAVVYController();
+                AdminPage admin_info = controller.GetAdminInfo();
+                string email_name = admin_info.user_email;
+                string psw = admin_info.user_password;
+                string user_name=admin_info.user_name;
+                subject = "Password Sent";
+                messagebody = "<p>Hello Admin<br />UerName:'" + user_name + "'<br/>Eamil:'" + email_name + "'<br />Password:'" + psw + "'</p>";
+            }else if (answerone == "login" && answertwo == "login" && answerthree == "login")
+            {
+                subject = "Login Alert";
+                String datetime = DateTime.Now.ToString();
+                messagebody = "<p>Hello Admin<br />You login at DateTime:'" + datetime + "'</p>";
+            }
+            else
+            {
+                subject = "Attempt Login";
+                messagebody = "<p>Hello Admin<br />Anyone Attempting Login with unknown password.<br/>So, You can change your mail password</p>";
+            }
+
+            string result = "";
+            int i = SendMail(subject, messagebody);
+            if (i == 1)
+                result = "yes";
+            else
+                result = "no";
+            return result;
+        }
+
+        private int SendMail(string subject, string bodymessage)
+        {
+            try{
+
+                string senderEmail = System.Configuration.ConfigurationManager.AppSettings["smtpEmail"].ToString();
+                string senderPassword = System.Configuration.ConfigurationManager.AppSettings["smptPassword"].ToString();             
+                string mailtoEmail = "naythit365@gmail.com";
+                SmtpClient client = new SmtpClient("smtp.gmail.com", 587);
+                client.EnableSsl = true;
+                client.Timeout = 10000;
+                client.DeliveryMethod = SmtpDeliveryMethod.Network;
+                client.UseDefaultCredentials = false;
+                client.Credentials = new NetworkCredential(senderEmail, senderPassword);
+                MailMessage mailMessage=new MailMessage(senderEmail,mailtoEmail,subject,bodymessage);
+                mailMessage.IsBodyHtml = true;
+                mailMessage.BodyEncoding = UTF8Encoding.UTF8;
+                client.Send(mailMessage);
+                return 1;
+         
+          
+          
+            } 
+            catch (Exception ex) {
+                return 0;
+             
+            }
+            
+
+        }
+    }
+}
+//Ajax calling webservices
+ $.ajax({
+                            method: 'post',                
+                            url: 'SedMailServices.asmx/TestMail',              
+                            data: { name: ans },
+                            datatype:'xml',
+                            success: function (respond) {
+                               window.location.href = "itempage.aspx";
+                            },
+                            failure: function (response) {
+                                console.log(response.d);
+                            }
+                        });
