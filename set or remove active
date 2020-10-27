@@ -1,0 +1,3 @@
+<asp:TextBox ID="txtTDItemPrice" runat="server" onkeypress="return isNumberKey(event)" ClientIDMode="Static" />
+ <label for="txtTDItemPrice">Item Price</label>
+$("label[for='txtTDItemPrice']").removeClass("active");
