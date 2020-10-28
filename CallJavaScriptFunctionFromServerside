@@ -1,1 +1,3 @@
-ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "Script", "Getting_DropDownList();", true);
+ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "Script", "showLoading();", true);
+    or
+  ScriptManager.RegisterStartupScript(this, GetType(), "showLoading", "showLoading();", true);
