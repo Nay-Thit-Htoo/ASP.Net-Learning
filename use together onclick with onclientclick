@@ -1,0 +1,25 @@
+<script language=”javascript” type=”text/javascript”>
+function confirmDelete()
+{
+if(confirm(“Are you sure you want to submit the page?”))
+{
+return true;
+}
+else
+{
+return false;
+}
+}
+</script>
+
+
+//server side button
+//must return true or false
+<asp:Button ID="btnDeleteServer" runat="server" meta:resourcekey="btnDeleteServer" OnClientClick="return confirmDelete();"  OnClick="btnDeleteServer_Click" />
+
+
+//code behind
+protected void btnDeleteServer_Click(object sender, EventArgs e)
+{
+   //you process
+}
