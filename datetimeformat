@@ -1,0 +1,7 @@
+ 
+ String startDate =string.Format("{0:dd-MM-yyyy}", incoming_date.Split('-')[0].ToString().Trim());
+ String endDate = string.Format("{0:dd-MM-yyyy}", incoming_date.Split('-')[1].ToString().Trim());      
+ 
+ //only get date
+ DateTime dTime=DateTime.Now();
+ String real_date=string.format("{0:d}",dTime);
