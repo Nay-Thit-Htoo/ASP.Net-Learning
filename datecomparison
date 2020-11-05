@@ -1,0 +1,24 @@
+DateTime dateTime1 = DateTime.Parse("05/05/2009");
+DateTime dateTime2 = DateTime.Now;
+if (dateTime1.Date > dateTime2.Date)
+{
+    //It's later date
+}
+else
+{
+    //It's earlier or equal date
+}
+
+int result = DateTime.Compare(dateTime1, dateTime2);
+if (result < 0)
+{
+    //it is earlier
+}
+else if (result == 0)
+{
+    //it is the same time as
+}
+else
+{
+    //it is later
+}
