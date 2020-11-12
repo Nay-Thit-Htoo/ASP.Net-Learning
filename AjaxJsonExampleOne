@@ -1,0 +1,59 @@
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script> 
+
+<script type="text/javascript">  
+    $(function () {  
+  
+       //create array and insert
+        var results = new Array();  
+  
+        var emp1 = { "ID": "12", "Name": "Manas" };  
+        results.push(emp1); 
+  
+        var emp2 = { "ID": "2", "Name": "Tester" };  
+        results.push(emp2);      
+          
+        
+         // Without array you can use like to construct JSON object  
+        // var results = { empList : [{ "ID": "1", "Name": "Manas" },   
+        //                            { "ID": "2", "Name": "Tester" }] };  
+          //emplist is custom create name
+        var postData = { empList: results };  
+  
+        $.ajax({  
+            url: 'WebForm1.aspx/SaveEmpList',  
+            data: JSON.stringify(postData),  
+            type: 'POST',  
+            contentType: 'application/json',  
+            dataType: 'json',  
+            beforeSend: function(){  
+                Show(); // Show loader icon  
+            },  
+            success: function (response) {  
+                // Looping over emloyee list and display it  
+                $.each(response.d, function (index, emp) {  
+                    $('#output').append('<p>Id: ' + emp.ID + '</p>' +  
+                                        '<p>Id: ' + emp.Name + '</p>');  
+                });  
+            },            
+            complete: function(){  
+                Hide(); // Hide loader icon  
+            },  
+            failure: function (jqXHR, textStatus, errorThrown) {                  
+                alert("Status: " + jqXHR.status + "; Error: " + jqXHR.responseText); // Display error message  
+            }  
+        });  
+    });  
+  
+    $(document).ready(function () {  
+        $("#div_Loader").hide();  
+    });  
+  
+    function Show() {  
+        $('#div_Loader').show();  
+    }  
+  
+    function Hide() {  
+        $('#div_Loader').hide();  
+    }  
+  
+</script> 
