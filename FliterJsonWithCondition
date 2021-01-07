@@ -1,0 +1,7 @@
+ var secondJson=$.grep( Your Json, function( n, i ) 
+ {
+                return n.ObjectName== Your Value;
+ });
+ 
+ //alaways return json
+            
