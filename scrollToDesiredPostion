@@ -1,0 +1,3 @@
+var myElement = document.getElementById('attchmentTableRow');//parent id
+var topPos = myElement.offsetTop;
+document.getElementById('applyattachmenttable').scrollTop = topPos;//desired id
