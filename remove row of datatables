@@ -1,0 +1,2 @@
+ var row = your_datatable_name.find('tr').eq(each_row_id);            
+your_datatable_name.fnDeleteRow(row[1]);
