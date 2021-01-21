@@ -1,0 +1,6 @@
+
+            var itemspec_list = choose_list.filter((thing, index, self) =>
+                                       index === self.findIndex((t) => (
+                                         t.ItemId === thing.ItemSpecificationId && t.ItemSpecification === thing.ItemSpecification
+                                       ))
+                                     )   
